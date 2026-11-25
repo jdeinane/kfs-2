@@ -18,6 +18,7 @@ CFLAGS = -m32 \
 	-nodefaultlibs \
 	-fno-builtin \
 	-fno-stack-protector \
+	-Iinclude \
 	-Wall -Wextra
 # demande a NASM de produire des fichiers objets au format ELF 32 bits
 ASFLAGS = -f elf32	
@@ -27,7 +28,8 @@ ASFLAGS = -f elf32
 LDFLAGS = -m elf_i386 -T linker.ld
 
 # liste les fichiers objets necessaires pour construire le noyau
-OBJS = boot.o kernel.o
+OBJS = boot.o kernel.o \
+	src/gdt.o src/gdt_flush.o
 
 # definit la cible all, elle depend de $(NAME)
 # executer `make` construit donc kernel.bin
